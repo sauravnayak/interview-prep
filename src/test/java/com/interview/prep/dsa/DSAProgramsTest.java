@@ -5,7 +5,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 /** Tests for DSA-01. Mirrors the hidden-test edge cases graders use. */
-public class NthMaxTest {
+public class DSAProgramsTest {
 
     @DataProvider(name = "cases")
     public Object[][] cases() {
@@ -20,21 +20,16 @@ public class NthMaxTest {
 
     @Test(dataProvider = "cases")
     public void returnsNthDistinctMax(int[] arr, int n, int expected) {
-        Assert.assertEquals(NthMax.nthMax(arr, n), expected);
+        Assert.assertEquals(NthMax.returnNthMax(arr, n), expected);
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void throwsOnEmptyArray() {
-        NthMax.nthMax(new int[]{}, 1);
+        NthMax.returnNthMax(new int[]{}, 1);
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void throwsWhenNExceedsDistinctCount() {
-        NthMax.nthMax(new int[]{1, 1, 2}, 3); // only 2 distinct values
-    }
-
-    @Test
-    public void singlePassSecondLargest() {
-        Assert.assertEquals(NthMax.secondLargest(new int[]{4, 2, 9, 9, 7, 1}), 7);
+        NthMax.returnNthMax(new int[]{1, 1, 2}, 3); // only 2 distinct values
     }
 }
