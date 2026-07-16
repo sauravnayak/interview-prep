@@ -1,4 +1,4 @@
-package com.interview.prep.dsa;
+package com.interview.prep.dsa.programs;
 
 import java.util.*;
 

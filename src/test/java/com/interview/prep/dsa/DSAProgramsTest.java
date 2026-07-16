@@ -1,5 +1,6 @@
 package com.interview.prep.dsa;
 
+import com.interview.prep.dsa.programs.NthMax;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
