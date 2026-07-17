@@ -1,10 +1,7 @@
 package com.interview.prep.dsa;
 
 
-import com.interview.prep.dsa.programs.FindMissingNumber_DSA5;
-import com.interview.prep.dsa.programs.MoveAllZeroes_End_DSA06;
-import com.interview.prep.dsa.programs.RemoveDupInArrayCount_DSA4;
-import com.interview.prep.dsa.programs.RotateArrayByK;
+import com.interview.prep.dsa.programs.*;
 
 /**
 
@@ -64,14 +61,21 @@ public class DSAPrograms {
         Input: arr[] = [1, 2, 3, 4, 5], k = 4
         Output: [2, 3, 4, 5, 1]
 
-         */
         int [] arr= new int [] {1, 2, 3, 4, 5, 6};
         RotateArrayByK.rotateArray(arr,2);
 
+         */
 
+        /* DSA-08 Counting frequencies of array elements
+         Given an array arr[] of non-negative integers which may contain duplicate elements.
+         Return the frequency of each distinct element present in the array.
+         Examples:
 
-
-
-
+         Input:  arr[] = [10, 20, 10, 5, 20]
+         Output: [[5, 1], [10, 2], [20, 2]]
+         Explanation: Here 5 occurs once, 10 occurs 2 times and 20 occurs 2 times
+         */
+        int [] arr= new int [] {10, 20, 10, 5, 20};
+        Frequency_InArray_DSA08.printFrequency(arr);
     }
 }

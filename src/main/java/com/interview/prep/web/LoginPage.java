@@ -1,5 +1,7 @@
 package com.interview.prep.web;
 
+import dev.failsafe.internal.util.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,17 +20,17 @@ public class LoginPage {
     private final WebDriver driver;
     private final WebDriverWait wait;
 
-    @FindBy(id = "user")
+    @FindBy(id = "username")
     private WebElement username;
 
-    @FindBy(id = "pass")
+    @FindBy(id = "password")
     private WebElement password;
 
-    @FindBy(id = "login")
+    @FindBy(id = "submit-login")
     private WebElement loginButton;
 
-    @FindBy(css = ".error-message")
-    private WebElement errorMessage;
+    @FindBy(css = "#flash > b")
+    private WebElement messageLabel;
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
@@ -37,12 +39,25 @@ public class LoginPage {
     }
 
     public void login(String user, String pass) {
+        removeAdsFromDOM();
         wait.until(ExpectedConditions.visibilityOf(username)).sendKeys(user);
         password.sendKeys(pass);
         wait.until(ExpectedConditions.elementToBeClickable(loginButton)).click();
     }
 
-    public String getErrorMessage() {
-        return wait.until(ExpectedConditions.visibilityOf(errorMessage)).getText();
+    protected void removeAdsFromDOM() {
+        try {
+            // Run clean JS script to find and destroy common Google Ad containers instantly
+            ((JavascriptExecutor) driver).executeScript(
+                    "document.querySelectorAll('ins.adsbygoogle, iframe[id^=\"aswift\"], iframe[id^=\"google_ads\"]').forEach(el => el.remove());"
+            );
+        } catch (Exception e) {
+            System.out.println("Failed to clear background ad nodes: " + e.getMessage());
+        }
     }
+
+    public String getLoginMessage(){
+        return  messageLabel.getText().trim();
+    }
+
 }

@@ -1,8 +1,6 @@
 package com.interview.prep.web;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 
 /**
  * Simple driver factory (FW-07 Factory pattern).
@@ -10,17 +8,22 @@ import org.openqa.selenium.chrome.ChromeOptions;
  */
 public final class DriverFactory {
 
+    private static final ThreadLocal<WebDriver> driver= new ThreadLocal<>();
+
     private DriverFactory() {
     }
-
-    public static WebDriver create(String browser, boolean headless) {
-        if ("chrome".equalsIgnoreCase(browser)) {
-            ChromeOptions options = new ChromeOptions();
-            if (headless) {
-                options.addArguments("--headless=new");
-            }
-            return new ChromeDriver(options);
-        }
-        throw new IllegalArgumentException("Unsupported browser: " + browser);
+    public static WebDriver getDriver(){
+        return  driver.get();
     }
+    public static void setDriver(WebDriver driverInstance){
+        driver.set(driverInstance);
+    }
+
+    public  static void quit(){
+        if(getDriver()!=null){
+            getDriver().quit();
+            driver.remove();
+        }
+    }
+
 }
