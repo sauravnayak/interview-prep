@@ -1,6 +1,5 @@
 package com.interview.prep.web;
 
-import dev.failsafe.internal.util.Assert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,6 +31,9 @@ public class LoginPage {
     @FindBy(css = "#flash > b")
     private WebElement messageLabel;
 
+    @FindBy(css="[class *=\"icon-signout\"]")
+    private WebElement logoutButton;
+
     public LoginPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -58,6 +60,14 @@ public class LoginPage {
 
     public String getLoginMessage(){
         return  messageLabel.getText().trim();
+    }
+
+    public boolean isLogoutDisplayed(){
+        return  logoutButton.isDisplayed();
+    }
+
+    public boolean isSecureURL(){
+        return  driver.getCurrentUrl().contains("/secure");
     }
 
 }
