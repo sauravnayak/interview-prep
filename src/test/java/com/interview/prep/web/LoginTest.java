@@ -14,15 +14,45 @@ public class LoginTest extends BaseTest {
     @Test()
     public void successFulLoginTest() {
         String path ="/login", username="practice", password="SuperSecretPassword!";
-        String message="You logged into a secure area!";
+        String successmessage="You logged into a secure area!";
+
         navigateTo(path);
         LoginPage loginPage = new LoginPage(getDriver());
-        log.info("Login into application with "+ username+ " and password "+password);
+        log.info("Login into application with {} and password {}", username, password);
         loginPage.login(username, password);
         log.info("Login successful");
-        Assert.assertEquals(loginPage.getLoginMessage(),message);
+        Assert.assertEquals(loginPage.getLoginMessage(),successmessage);
         Assert.assertTrue(loginPage.isLogoutDisplayed());
         Assert.assertTrue(loginPage.isSecureURL());
+
+    }
+
+    @Test()
+    public void usernameFailureLoginTest() {
+        String path ="/login", username="wrongj", password="SuperSecretPassword!";
+        String userNameError="Your username is invalid!";
+
+        navigateTo(path);
+        LoginPage loginPage = new LoginPage(getDriver());
+        log.info("Login into application with {} and password {}", username, password);
+        loginPage.login(username, password);
+        Assert.assertEquals(loginPage.getLoginMessage(),userNameError);
+        Assert.assertFalse(loginPage.isSecureURL());
+        log.info("UserName Error Message Validated");
+
+    }
+    @Test()
+    public void passwordFailureLoginTest() {
+        String path ="/login", username="practice", password="wrongPassword!";
+        String pwdError="Your password is invalid!";
+
+        navigateTo(path);
+        LoginPage loginPage = new LoginPage(getDriver());
+        log.info("Login into application with {} and password {}", username, password);
+        loginPage.login(username, password);
+        Assert.assertEquals(loginPage.getLoginMessage(),pwdError);
+        Assert.assertFalse(loginPage.isSecureURL());
+        log.info("password Error Message Validated");
 
     }
 }

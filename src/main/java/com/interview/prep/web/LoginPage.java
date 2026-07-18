@@ -34,6 +34,9 @@ public class LoginPage {
     @FindBy(css="[class *=\"icon-signout\"]")
     private WebElement logoutButton;
 
+    @FindBy(partialLinkText = "here")
+    private WebElement herePartialLink;
+
     public LoginPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -42,6 +45,7 @@ public class LoginPage {
 
     public void login(String user, String pass) {
         removeAdsFromDOM();
+        hereLinkDisplayed();
         wait.until(ExpectedConditions.visibilityOf(username)).sendKeys(user);
         password.sendKeys(pass);
         wait.until(ExpectedConditions.elementToBeClickable(loginButton)).click();
@@ -68,6 +72,10 @@ public class LoginPage {
 
     public boolean isSecureURL(){
         return  driver.getCurrentUrl().contains("/secure");
+    }
+
+    public boolean hereLinkDisplayed(){
+        return  herePartialLink.isDisplayed();
     }
 
 }

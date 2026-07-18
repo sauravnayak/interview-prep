@@ -32,6 +32,7 @@ public class BaseTest {
     public void setUp(){
        driverInstance= create("chrome",false);
         DriverFactory.setDriver(driverInstance);
+        log.info("------------------------------------------------------------------------------");
         log.info("Starting browser..."+ browser);
         getDriver().manage().window().maximize();
         log.info("Maximizing the Browser Window");
@@ -40,6 +41,7 @@ public class BaseTest {
     @AfterMethod(alwaysRun = true)
     public void postCondition() {
         log.info("Closing the browser");
+        log.info("------------------------------------------------------------------------------");
         DriverFactory.quit();
     }
 
