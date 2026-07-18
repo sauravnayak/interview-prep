@@ -1,18 +1,21 @@
 package com.interview.prep.web;
 
+import com.interview.prep.CustomListeners;
 import com.interview.prep.base.BaseTest;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static com.interview.prep.web.DriverFactory.getDriver;
 
+@Listeners(CustomListeners.class)
 public class DropDownTest extends BaseTest {
 
     DropDownPage dropDownPage;
 
     @Test
-    public void dropDownTest() throws InterruptedException {
+    public void dropDownTest() {
         navigateTo("/dropdown");
         dropDownPage= new DropDownPage(getDriver());
 
@@ -36,7 +39,6 @@ public class DropDownTest extends BaseTest {
         Assert.assertEquals(countrySelect.getFirstSelectedOption().
                 getAttribute("value"), "IN",
                 "India was not selected");
-
 
     }
 }
