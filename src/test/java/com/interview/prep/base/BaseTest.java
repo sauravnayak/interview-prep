@@ -23,6 +23,7 @@ public class BaseTest {
             ChromeOptions options = new ChromeOptions();
             if (headless) {
                 options.addArguments("--headless=new");
+                options.addArguments("--window-size=1920,1080");
             }
             return new ChromeDriver(options);
         }
@@ -30,11 +31,11 @@ public class BaseTest {
     }
     @BeforeMethod
     public void setUp(){
-       driverInstance= create("chrome",false);
-        DriverFactory.setDriver(driverInstance);
+        // driverInstance= create("chrome",true);
+        DriverFactory.setDriver(create("chrome",false));
         log.info("------------------------------------------------------------------------------");
         log.info("Starting browser..."+ browser);
-        getDriver().manage().window().maximize();
+        getDriver().manage().window().setSize(new org.openqa.selenium.Dimension(1920, 1080));
         log.info("Maximizing the Browser Window");
     }
 

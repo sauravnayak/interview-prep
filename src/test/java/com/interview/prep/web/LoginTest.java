@@ -10,14 +10,15 @@ import static com.interview.prep.web.DriverFactory.getDriver;
 
 @Listeners(CustomListeners.class)
 public class LoginTest extends BaseTest {
+    LoginPage loginPage;
 
     @Test()
     public void successFulLoginTest() {
         String path ="/login", username="practice", password="SuperSecretPassword!";
         String successmessage="You logged into a secure area!";
+        loginPage = new LoginPage(getDriver());
 
         navigateTo(path);
-        LoginPage loginPage = new LoginPage(getDriver());
         log.info("Login into application with {} and password {}", username, password);
         loginPage.login(username, password);
         log.info("Login successful");
@@ -31,9 +32,8 @@ public class LoginTest extends BaseTest {
     public void usernameFailureLoginTest() {
         String path ="/login", username="wrongj", password="SuperSecretPassword!";
         String userNameError="Your username is invalid!";
-
+        loginPage = new LoginPage(getDriver());
         navigateTo(path);
-        LoginPage loginPage = new LoginPage(getDriver());
         log.info("Login into application with {} and password {}", username, password);
         loginPage.login(username, password);
         Assert.assertEquals(loginPage.getLoginMessage(),userNameError);
@@ -45,9 +45,8 @@ public class LoginTest extends BaseTest {
     public void passwordFailureLoginTest() {
         String path ="/login", username="practice", password="wrongPassword!";
         String pwdError="Your password is invalid!";
-
+        loginPage = new LoginPage(getDriver());
         navigateTo(path);
-        LoginPage loginPage = new LoginPage(getDriver());
         log.info("Login into application with {} and password {}", username, password);
         loginPage.login(username, password);
         Assert.assertEquals(loginPage.getLoginMessage(),pwdError);

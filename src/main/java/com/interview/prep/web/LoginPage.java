@@ -63,6 +63,7 @@ public class LoginPage {
     }
 
     public String getLoginMessage(){
+        wait.until(ExpectedConditions.visibilityOf(messageLabel));
         return  messageLabel.getText().trim();
     }
 

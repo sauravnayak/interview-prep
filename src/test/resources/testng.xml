@@ -11,12 +11,13 @@
     <test name="Selenium Test">
         <classes>
             <class name="com.interview.prep.web.LoginTest"/>
+            <class name="com.interview.prep.web.LocatorsTest"/>
         </classes>
     </test>
 
     <test name="api" >
         <classes>
-            <class name="com.interview.prep.api.ApiTests"/>
+            <class name="com.interview.prep.api.GoRestApiTest"/>
         </classes>
     </test>
 
