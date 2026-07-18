@@ -1,15 +1,18 @@
 package com.interview.prep.web;
 
+import com.interview.prep.CustomListeners;
 import com.interview.prep.base.BaseTest;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import java.time.Duration;
 
 import static com.interview.prep.web.DriverFactory.getDriver;
 
+@Listeners(CustomListeners.class)
 public class SlowTest extends BaseTest {
 
     SlowPage page;

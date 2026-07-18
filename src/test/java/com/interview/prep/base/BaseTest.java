@@ -32,7 +32,7 @@ public class BaseTest {
     @BeforeMethod
     public void setUp(){
         // driverInstance= create("chrome",true);
-        DriverFactory.setDriver(create("chrome",false));
+        DriverFactory.setDriver(create("chrome",true));
         log.info("------------------------------------------------------------------------------");
         log.info("Starting browser..."+ browser);
         getDriver().manage().window().setSize(new org.openqa.selenium.Dimension(1920, 1080));
