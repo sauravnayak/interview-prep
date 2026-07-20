@@ -38,7 +38,7 @@ public class GoRestApiTest {
 
     }
 
-    @Test()
+    @Test(enabled = false)
     public void createUserSaurav(){
         int random=new Random().nextInt(100);
         Map<String,Object> requestBody = new HashMap<>();

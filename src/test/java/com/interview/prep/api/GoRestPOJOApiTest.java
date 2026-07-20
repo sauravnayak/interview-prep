@@ -1,9 +1,11 @@
 package com.interview.prep.api;
 
+import com.interview.prep.CustomListeners;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.util.Random;
@@ -11,6 +13,7 @@ import java.util.Random;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
+@Listeners(CustomListeners.class)
 public class GoRestPOJOApiTest {
 
     int random = new Random().nextInt(100);
@@ -29,7 +32,7 @@ public class GoRestPOJOApiTest {
         RestAssured.basePath = "/public/v2";
     }
 
-    @Test()
+    @Test(priority = 1)
     public void getAllUsers() {
         Response response =
                 given()
@@ -46,9 +49,9 @@ public class GoRestPOJOApiTest {
                 "The Response code mismatch");
     }
 
-    @Test(dependsOnMethods = "getAllUsers")
+    @Test(dependsOnMethods = "getAllUsers",priority =2)
     public void testPagination() {
-        targetPage = totalItem % 10;
+        targetPage = Math.max(totalItem % 10,1);
         targetLimit = 5;
         Response response =
                 given()
@@ -71,7 +74,7 @@ public class GoRestPOJOApiTest {
 
     }
 
-    @Test(priority = 1)
+    @Test(priority = 3)
     public void createUser() {
         userID =
         given()
@@ -94,7 +97,7 @@ public class GoRestPOJOApiTest {
     }
 
     //Example of PUT
-    @Test(priority = 2)
+    @Test(priority = 4,dependsOnMethods = "createUser")
     public void updateUser() {
         given()
                 .header("Content-Type", "application/json")
@@ -113,7 +116,7 @@ public class GoRestPOJOApiTest {
     }
 
     //Example of Patch
-    @Test(priority = 3)
+    @Test(priority = 5, dependsOnMethods = "createUser")
     public void updateEmail() {
         String updatedEmail = "sauravnayak9@example.com";
         String emailBody = "{\"email\":\"" + updatedEmail + "\"}";
@@ -134,7 +137,7 @@ public class GoRestPOJOApiTest {
                 .log().body();
     }
 
-    @Test(dependsOnMethods = "createUser", priority = 4)
+    @Test(dependsOnMethods = "createUser", priority = 6)
     public void deleteUser() {
         given()
                 .header("Content-Type", "application/json")
