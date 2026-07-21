@@ -2,7 +2,12 @@ package com.interview.prep.api;
 
 import com.interview.prep.utility.CustomListeners;
 import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.builder.ResponseSpecBuilder;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+import io.restassured.specification.ResponseSpecification;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
@@ -148,6 +153,32 @@ public class GoRestPOJOApiTest {
                 .delete("users/" + userID)
         .then()
                 .statusCode(204);
+    }
+
+    @Test(priority = 7)
+    public void requestSpecResponseSpec() {
+        RequestSpecification req = new RequestSpecBuilder()
+                .setBaseUri("https://reqres.in")
+                .setBasePath("/api")
+                .setContentType(ContentType.JSON)
+                .addHeader("x-api-key","free_user_3Gp42nmyMV2T0cvDYHfI4l79N7b")
+                .build();
+
+        // 2. Response specification matching exact JSON type
+        ResponseSpecification res = new ResponseSpecBuilder()
+                .expectStatusCode(200)
+                .expectContentType(ContentType.JSON)
+                .build();
+
+        // 3. Simple execution
+        given()
+                .spec(req)
+                .when()
+                .get("/users/2")
+                .then()
+                .spec(res)
+                .log().body()
+                .body("data.id", equalTo(2));
     }
 
 }
