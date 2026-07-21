@@ -1,6 +1,6 @@
 package com.interview.prep.api;
 
-import com.interview.prep.CustomListeners;
+import com.interview.prep.utility.CustomListeners;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -12,6 +12,7 @@ import java.util.Random;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
+import static io.restassured.module.jsv.JsonSchemaValidator.*;
 
 @Listeners(CustomListeners.class)
 public class GoRestPOJOApiTest {
@@ -41,6 +42,7 @@ public class GoRestPOJOApiTest {
                 .when()
                         .get("/users")
                 .then()
+                        .body(matchesJsonSchemaInClasspath("user-schema.json"))
                         .log().body()
                         .extract()
                         .response();

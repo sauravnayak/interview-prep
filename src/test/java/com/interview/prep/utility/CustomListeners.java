@@ -1,4 +1,4 @@
-package com.interview.prep;
+package com.interview.prep.utility;
 
 
 import org.apache.logging.log4j.LogManager;
