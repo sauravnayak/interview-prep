@@ -10,9 +10,12 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import static io.restassured.RestAssured.given;
@@ -179,6 +182,39 @@ public class GoRestPOJOApiTest {
                 .spec(res)
                 .log().body()
                 .body("data.id", equalTo(2));
+    }
+//Running test with Data Provider
+    @Test(priority = 3,dataProvider = "getUser",enabled = false)
+    public void createUserDataProvider(String name, String email, String gender, String status) {
+        Map<String,Object> user= new HashMap<>();
+        user.put("name",name);
+        user.put("email",email);
+        user.put("gender",gender);
+        user.put("status",status);
+        userID =
+                given()
+                        .header("Content-Type", "application/json")
+                        .header("Authorization", "Bearer demo-token")
+                        .body(user)
+                        .when()
+                        .post("/users")
+                        .then()
+                        .log().body()
+                        .statusCode(201)
+                        .body("id", greaterThan(1000))
+                        .body("name", equalTo(user.get("name")))
+                        .body("email", equalTo(user.get("email")))
+                        .body("gender", equalTo(user.get("gender")))
+                        .body("status", equalTo(user.get("status")))
+                        .extract()
+                        .path("id");
+
+    }
+
+
+    @DataProvider(name = "getUser")
+    public Object [] [] getusername(){
+        return new Object[][]{{"Saurav","saurav1@example.com","male","active"},{"Nayak","saurav2@example.com","male","active"}};
     }
 
 }
