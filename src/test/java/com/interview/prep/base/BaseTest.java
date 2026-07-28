@@ -13,7 +13,7 @@ import static com.interview.prep.web.DriverFactory.getDriver;
 
 public class BaseTest {
 
-    private static final String BASE_URL="https://practice.expandtesting.com";
+    private static final String BASE_URL="https://demoqa.com";
     WebDriver driverInstance;
     String browser="chrome";
     protected final Logger log = LogManager.getLogger(getClass());
