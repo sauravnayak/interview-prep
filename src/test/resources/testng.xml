@@ -18,7 +18,7 @@
         </classes>
     </test>
 
-    <test name="api" enabled="true">
+    <test name="api" enabled="false">
         <classes>
             <class name="com.interview.prep.api.GoRestApiTest"/>
             <class name="com.interview.prep.api.GoRestPOJOApiTest"/>

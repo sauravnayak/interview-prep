@@ -199,13 +199,14 @@ public class GoRestPOJOApiTest {
                         .when()
                         .post("/users")
                         .then()
-                        .log().body()
                         .statusCode(201)
                         .body("id", greaterThan(1000))
                         .body("name", equalTo(user.get("name")))
                         .body("email", equalTo(user.get("email")))
                         .body("gender", equalTo(user.get("gender")))
                         .body("status", equalTo(user.get("status")))
+                        .time(lessThan(2000L))
+                        .log().ifValidationFails()
                         .extract()
                         .path("id");
 
