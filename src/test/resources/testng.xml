@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="paypay-prep-suite" parallel="classes" thread-count="3">
-
+    <listeners>
+        <!-- Retrying logic to run atleast once  -->
+        <listener class-name="com.interview.prep.utility.AnnotationTransformer" />
+    </listeners>
     <test name="dsa" enabled="false">
         <classes>
             <class name="com.interview.prep.dsa.DSAProgramsTest"/>
