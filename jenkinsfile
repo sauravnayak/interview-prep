@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'Maven 3.x'
+        jdk 'Java 21'
+    }
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                cleanWs()
+                checkout scm
+            }
+        }
+
+        stage('Run Selenium Tests') {
+            steps {
+                // Triggers Maven to run your TestNG parallel suite
+                sh 'mvn clean test'
+            }
+        }
+    }
+
+    post {
+        always {
+            // Saves raw TestNG execution reports inside Jenkins UI
+            archiveArtifacts artifacts: 'target/surefire-reports/**/*', allowEmptyArchive: true
+
+            // Displays an interactive test result chart inside Jenkins
+            junit 'target/surefire-reports/**/*.xml'
+        }
+    }
+}
