@@ -4,6 +4,7 @@ pipeline {
     tools {
         maven 'Maven 3.x'
         jdk 'Java 21'
+        allure 'allure-cmd'
     }
 
     stages {
@@ -16,7 +17,7 @@ pipeline {
 
         stage('Run Selenium Tests') {
             steps {
-                // Triggers Maven to run your TestNG parallel suite
+                // Triggers Maven to run TestNG parallel suite
                 sh 'mvn clean test'
             }
         }
