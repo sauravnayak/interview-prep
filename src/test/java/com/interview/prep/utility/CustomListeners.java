@@ -1,6 +1,7 @@
 package com.interview.prep.utility;
 
 
+import io.qameta.allure.Attachment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.commons.io.FileUtils;
@@ -38,25 +39,38 @@ public class CustomListeners implements ITestListener {
         if (result.getThrowable() != null) {
             log.error("Reason: ", result.getThrowable());
         }
-        String timestamp =new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        File src= ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
-        File directory = new File(System.getProperty("user.dir"), "target/screenshots");
+        if (getDriver() != null) {
+            try {
+                // 1. Capture screenshot as raw bytes and attach directly to Allure Report
+                byte[] screenshotBytes = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
+                saveScreenshotToAllure(result.getMethod().getMethodName(), screenshotBytes);
 
-        // 3. Force create the folder structure if it doesn't exist yet
-        if (!directory.exists()) {
-            directory.mkdirs();
+                //  Preserving original local file backup logic
+                String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                File directory = new File(System.getProperty("user.dir"), "target/screenshots");
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
+                File dest = new File(directory, result.getMethod().getMethodName() + "_" + timestamp + ".png");
+
+                // Getting image as file to save locally
+                File src = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+                FileUtils.copyFile(src, dest);
+
+            } catch (Exception e) {
+                log.error("Failed to capture page screenshot: " + e.getMessage());
+            }
         }
-        File dest = new File(directory,result.getMethod().getMethodName()+timestamp+".png");
-
-        try {
-            FileUtils.copyFile(src,dest);
-        } catch (IOException e) {
-            System.out.println("Failed to capture page screenshot: " + e.getMessage());        }
 
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
         log.warn("⚠️ SKIPPED: " + result.getMethod().getMethodName()+"()");
+    }
+
+    @Attachment(value = "Failure Screenshot - {testName}", type = "image/png")
+    public byte[] saveScreenshotToAllure(String testName, byte[] screenshot) {
+        return screenshot;
     }
 }
