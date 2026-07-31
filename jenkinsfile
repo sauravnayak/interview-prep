@@ -24,11 +24,8 @@ pipeline {
 
     post {
         always {
-            // Saves raw TestNG execution reports inside Jenkins UI
-            archiveArtifacts artifacts: 'target/surefire-reports/**/*', allowEmptyArchive: true
-
-            // Displays an interactive test result chart inside Jenkins
-            junit 'target/surefire-reports/**/*.xml'
+            allure includeProperties: false, jdk: '', results: [[path: 'target/allure-results']]
         }
     }
+
 }
