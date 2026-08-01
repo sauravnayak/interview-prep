@@ -2,14 +2,17 @@ name: SDET Interview Prep Test Suite
 
 on:
   push:
-    branches: [ master ]
+    branches: [master ]
   pull_request:
-    branches: [ master ]
+    branches: [master ]
   workflow_dispatch:
 
 jobs:
   automation-tests:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout Code Repository
@@ -22,22 +25,10 @@ jobs:
           java-version: '21'
           cache: 'maven'
 
-      - name: Verify Chrome Installation for Selenium Headless
-        run: |
-          google-chrome --version
-
       - name: Execute Active TestNG Suites
         run: mvn clean test
 
-      - name: Load Allure Report History
-        uses: actions/checkout@v4
-        if: always()
-        continue-on-error: true
-        with:
-          ref: gh-pages
-          path: gh-pages
-
-      - name: Generate Allure Report
+      - name: Generate Allure Report Layout
         uses: simple-elf/allure-report-action@master
         if: always()
         id: allure-report
@@ -54,3 +45,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: allure-history
+          force_orphan: true
