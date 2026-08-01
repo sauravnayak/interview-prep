@@ -18,6 +18,10 @@
             <class name="com.interview.prep.web.IFrameTest"/>
             <class name="com.interview.prep.web.DropDownTest"/>
             <class name="com.interview.prep.web.SlowTest"/>
+            <class name="com.interview.prep.web.MultipleWindowsTest"/>
+            <class name="com.interview.prep.web.DynamicTableTest"/>
+            <class name="com.interview.prep.web.DragAndDropTest"/>
+
         </classes>
     </test>
 
