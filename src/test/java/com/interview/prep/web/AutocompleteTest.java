@@ -35,7 +35,7 @@ public class AutocompleteTest extends BaseTest {
     }
 
     @Test
-    public void testAutoCompleteByTextContains() throws InterruptedException {
+    public void testAutoCompleteByTextContains(){
         navigateTo("/autocomplete");
         AutocompletePage autocompletePage = new AutocompletePage(getDriver());
         //Typing in Textbox
@@ -55,6 +55,5 @@ public class AutocompleteTest extends BaseTest {
         autocompletePage.clickSubmit();
         //Asserting text displayed after form submission
         Assert.assertEquals(autocompletePage.getTextDisplayed(),"Japan");
-        Thread.sleep(1000);
     }
 }
