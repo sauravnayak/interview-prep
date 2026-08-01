@@ -4,40 +4,80 @@ Companion runnable project for the **Interview Assessment Prep Plan**.
 Use it as your scratch repo: every task in the study doc (`DSA-01`, `API-01`, `SEL-04`, …)
 gets implemented and run here so all your reps live in one place.
 
-## Requirements
+---
+
+## 🚀 Key Framework Features
+
+* **Thread-Safe Architecture:** Parallel test suite execution isolated cleanly via `DriverFactory`.
+* **Real-time Logging Pipeline:** Log4j2 outputs routed straight to terminal streams, local file dumps (`target/logs/`), and step entries.
+* **Automatic Failure Actions:** Automated page screenshot capturing and local storage management on failure states via TestNG's `CustomListeners`.
+
+---
+
+## 🛠️ Requirements
 - JDK 17+
 - Maven 3.8+
-- (Optional) Chrome for the Selenium example; Selenium Manager auto-resolves the driver.
-
-## Layout
-```
-inteview-prep/
+- Chrome Browser (Selenium Manager automatically resolves drivers locally)
+---
+## 📂 Repository Layout
+```text
+interview-prep/
 ├── pom.xml
+├── testng.xml                          # Master execution suite switcher
 ├── src/main/java/com/interview/prep/
-│   ├── dsa/NthMax.java          # DSA-01 (+ single-pass second largest)
+│   ├── dsa/
+│   │   └── NthMax.java                 # DSA-01 (+ single-pass second largest)
 │   └── web/
-│       ├── LoginPage.java       # SEL-04 Page Object Model
-│       └── DriverFactory.java   # FW-07 Factory pattern
+│       ├── LoginPage.java              # SEL-04 Page Object Model
+│       └── DriverFactory.java          # FW-07 Factory pattern
 └── src/test/
     ├── java/com/interview/prep/
-    │   ├── dsa/NthMaxTest.java   # DSA-01 tests with edge cases
-    │   └── api/ApiTests.java     # API-01..API-13 RestAssured skeletons
-    └── resources/testng.xml      # parallel suite
+    │   ├── api/                        # Suite: api (Disabled by default)
+    │   │   ├── ApiTests.java           # API-01..API-13 RestAssured skeletons
+    │   │   ├── GoRestApiTest.java
+    │   │   └── GoRestPOJOApiTest.java
+    │   ├── dsa/                        # Suite: dsa (Disabled by default)
+    │   │   └── DSAProgramsTest.java
+    │   ├── utility/                    # Support Hooks & Listeners
+    │   │   ├── AllureLog4j2Appender.java
+    │   │   └── CustomListeners.java
+    │   └── web/                        # Suite: Selenium Test (Enabled)
+    │       ├── AutocompleteTest.java
+    │       ├── DragAndDropTest.java
+    │       ├── DropDownTest.java
+    │       ├── DynamicTableTest.java
+    │       ├── IFrameTest.java
+    │       ├── LocatorsTest.java
+    │       ├── LoginTest.java
+    │       ├── MultipleWindowsTest.java
+    │       └── SlowTest.java
+    └── resources/
+        ├── log4j2-test.xml             # Log4j2 Configuration mapping
+        └── user-schema.json            # JSON schema validation target
 ```
 
-## Run
+---
+
+## 🧪 Execution & Commands
+
+### 1. Run via TestNG Suite Configurations (`testng.xml`)
+Running through Maven CLI ensures the **AspectJ Weaver javaagent** attaches properly to your framework threads, routing step details into the final dashboard:
+
 ```bash
-# Everything in the TestNG suite (DSA + API)
-mvn test
+# Execute active enabled blocks in testng.xml (Selenium Test by default)
+mvn clean test
 
-# Just the DSA tests
-mvn -Dtest=NthMaxTest test
+# Just a specific single class test target
+mvn -Dtest=LoginTest test
 
-# Just the API tests
-mvn -Dtest=ApiTests test
+# Run the NthMax program directly via CLI compilation
+mvn -q compile exec:java -Dexec.mainClass=com.interview.prep.dsa.NthMax
+```
 
-# Run the NthMax program directly
-mvn -q compile exec:java -Dexec.mainClass=dsa.com.interview.prep.NthMax
+### 2. Interactive Reporting
+Run the following command in the project's base directory after a test run has been completed. This command builds and opens a web browser window displaying HTML test metrics, nested inline log steps, and failure screenshots:
+```bash
+allure serve target/allure-results
 ```
 
 ## Where to grow it
