@@ -28,14 +28,6 @@ jobs:
       - name: Execute Active TestNG Suites
         run: mvn clean test
 
-      - name: Load Allure Report History
-        uses: actions/checkout@v4
-        if: always()
-        continue-on-error: true
-        with:
-          ref: gh-pages
-          path: gh-pages
-
       - name: Generate Allure Report Layout
         uses: simple-elf/allure-report-action@master
         if: always()
