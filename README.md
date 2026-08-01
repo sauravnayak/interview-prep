@@ -50,7 +50,7 @@ mvn -q compile exec:java -Dexec.mainClass=dsa.com.interview.prep.NthMax
 
 Run the following command in project's base directory after test run has been completed. This command will open a browser window with HTML test results.
 ```
-allure-results --clean -o target/allure-report
+allure serve target/allure-results
 ```
 ## Notes
 - `reqres.in` now needs a free API key header: `x-api-key: reqres-free-v1` (already set in `ApiTests`).
