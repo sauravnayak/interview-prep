@@ -16,10 +16,10 @@ jobs:
 
     steps:
       - name: Checkout Code Repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: Setup Java Environment (JDK 21)
-        uses: actions/setup-java@v6
+        uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: '21'
@@ -39,7 +39,7 @@ jobs:
           allure_history: allure-history
 
       - name: Deploy Test Report to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v6
+        uses: peaceiris/actions-gh-pages@v4
         if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
