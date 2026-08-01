@@ -95,3 +95,11 @@ allure serve target/allure-results
 ## Notes
 - `reqres.in` now needs a free API key header: `x-api-key: reqres-free-v1` (already set in `ApiTests`).
 - Swap the base URI / auth for whatever mock service you wish to use.
+
+## 🤝 Contribution
+
+1. Fork the project.
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`).
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
+4. Push to the branch (`git push origin feature/AmazingFeature`).
+5. Open a Pull Request.
