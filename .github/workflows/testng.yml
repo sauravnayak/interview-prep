@@ -1,4 +1,4 @@
-name: SDET Interview Prep Test Suite
+name: Selenium + API  Prep Test Suite
 
 on:
   push:
