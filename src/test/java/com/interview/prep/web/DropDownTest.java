@@ -36,6 +36,7 @@ public class DropDownTest extends BaseTest {
         // Selecting by index for Country Selector
         Select countrySelect = new Select(dropDownPage.getCountryDropDown());
         countrySelect.selectByVisibleText("India");
+
         Assert.assertEquals(countrySelect.getFirstSelectedOption().
                 getAttribute("value"), "IN",
                 "India was not selected");
