@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="interview-prep-suite" parallel="tests" thread-count="2">
+    <listeners>
+        <!-- Retrying logic to run atleast once  -->
+        <listener class-name="com.interview.prep.utility.AnnotationTransformer" />
+    </listeners>
+    <test name="dsa" enabled="false">
+        <classes>
+            <class name="com.interview.prep.dsa.DSAProgramsTest"/>
+        </classes>
+    </test>
+
+    <test name="Selenium Chrome Test">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="com.interview.prep.web.LoginTest"/>
+            <class name="com.interview.prep.web.LocatorsTest"/>
+            <class name="com.interview.prep.web.IFrameTest"/>
+            <class name="com.interview.prep.web.DropDownTest"/>
+            <class name="com.interview.prep.web.SlowTest"/>
+            <class name="com.interview.prep.web.MultipleWindowsTest"/>
+            <class name="com.interview.prep.web.DynamicTableTest"/>
+            <class name="com.interview.prep.web.DragAndDropTest"/>
+            <class name="com.interview.prep.web.AutocompleteTest"/>
+
+        </classes>
+    </test>
+
+    <test name="Selenium FireFox Test">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="com.interview.prep.web.LoginTest"/>
+            <class name="com.interview.prep.web.LocatorsTest"/>
+            <class name="com.interview.prep.web.IFrameTest"/>
+            <class name="com.interview.prep.web.DropDownTest"/>
+            <class name="com.interview.prep.web.SlowTest"/>
+            <class name="com.interview.prep.web.MultipleWindowsTest"/>
+            <class name="com.interview.prep.web.DynamicTableTest"/>
+            <class name="com.interview.prep.web.DragAndDropTest"/>
+            <class name="com.interview.prep.web.AutocompleteTest"/>
+
+        </classes>
+    </test>
+
+    <test name="api" enabled="false">
+        <classes>
+            <class name="com.interview.prep.api.GoRestApiTest"/>
+            <class name="com.interview.prep.api.GoRestPOJOApiTest"/>
+        </classes>
+    </test>
+
+</suite>
