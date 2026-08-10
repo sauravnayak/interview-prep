@@ -22,6 +22,8 @@
             <class name="com.interview.prep.web.DynamicTableTest"/>
             <class name="com.interview.prep.web.DragAndDropTest"/>
             <class name="com.interview.prep.web.AutocompleteTest"/>
+            <class name="com.interview.prep.web.FileUploadTests"/>
+            <class name="com.interview.prep.web.FormTests"/>
 
         </classes>
     </test>
