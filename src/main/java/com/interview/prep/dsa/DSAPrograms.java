@@ -3,6 +3,9 @@ package com.interview.prep.dsa;
 
 import com.interview.prep.dsa.programs.*;
 
+import java.util.Arrays;
+import java.util.Map;
+
 /**
 
  * n = 1 returns the maximum, n = 2 the second maximum, and so on.
@@ -74,8 +77,42 @@ public class DSAPrograms {
          Input:  arr[] = [10, 20, 10, 5, 20]
          Output: [[5, 1], [10, 2], [20, 2]]
          Explanation: Here 5 occurs once, 10 occurs 2 times and 20 occurs 2 times
+         int [] arr= new int [] {10, 20, 10, 5, 20};
+         Frequency_InArray_DSA08.printFrequency(arr);
          */
-        int [] arr= new int [] {10, 20, 10, 5, 20};
-        Frequency_InArray_DSA08.printFrequency(arr);
+
+
+        /* Write a program to find Next Permutation
+        Input: arr[] = [2, 4, 1, 7, 5, 0]
+        Output: [2, 4, 5, 0, 1, 7]
+        int[] example = {3, 2, 1};
+        System.out.println("Original: " + Arrays.toString(example));
+        NextPermutation.nextPermutation(example);
+        System.out.println("Next:     " + Arrays.toString(example));
+         */
+
+        /* Write a program to Majority Element - More Than n/3
+        Input: arr[] = [2, 2, 3, 1, 3, 2, 1, 1]
+        Output: [1, 2]
+        Explanation: The frequency of 1 and 2 is 3, which is more than floor n/3 (8/3 = 2).
+        int [] example = {2, 2, 3, 1, 3, 2, 1, 1};
+        MajorityFloorElements.majorityElementN3(example);
+
+         */
+
+        /* Write a Program to find profit -Stock Buy and Sell – Multiple Transaction Allowed
+        int [] example = {100, 180, 260, 310, 40, 535, 695};
+        System.out.println("The Profit Analysed is :"+ MaxProfit_MultipleTransaction.maximumProfitForMultipleTransactions(example));
+         */
+
+        /* Write a Program to find profit -Stock Buy and Sell – Only one Transaction Allowed
+        int [] example = {7, 10, 1, 3, 6, 9, 2};
+        System.out.println("The Profit Analysed is :"+ MaxProfit_OneTransaction.maximumProfit_ForOneTransaction(example));
+         */
+
+        int [] example = {1, 3, 6, 9, 11};
+        System.out.println("The Profit Analysed is :"+ MaxProfit_OneTransaction.maximumProfit_ForOneTransaction(example));
+
+
     }
 }
