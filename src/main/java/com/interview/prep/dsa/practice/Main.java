@@ -1,5 +1,7 @@
 package com.interview.prep.dsa.practice;
 
+import com.interview.prep.dsa.practice.classicalgorithm.*;
+
 public class Main {
 
     public static void main(String [] args){
@@ -65,12 +67,55 @@ public class Main {
          *
          */
 
-        int [] a = new int [] {3,4,6,5,21,3,10};
-        DSA09_TwoIndicesForTargetSum.getIndices(a,9);
-        
+        /**  DSA-10  Maximum subarray sum (Kadane's algorithm)
+         *         int [] a = new int [] {2, 3, -8, 7, -1, 2, 3};
+         *         DSA10_MaximumSubarray.maximumSubArray(a);
+         *
+         */
 
 
+        /**   DSA-11  Binary search (iterative) + first/last occurrence
+         *         int [] a = new int [] {2, 4,4,6,4,8,11};
+         *         DSA11_BinarySearch.binarySearch(a,4);
+         *
+         */
 
+        /**   DSA-12  Sliding window — max sum of k consecutive / longest substring without repeat
+         *         int [] a = new int [] {2, 1, 5, 1, -3, 2};
+         *         DSA12_MaximumSubArrayOfKSize.maximumSubarrayOfKSize(a,3);
+         *
+         */
 
+        /**   DSA-13  Check anagram / group anagrams
+         * in - ["eat","tea","tan","ate","nat","bat"]
+         * out -[["bat"],["nat","tan"],["ate","eat","tea"]]
+         *        #Using stream
+         *       String [] a = new String[]  {"eat","tea","tan","ate","nat","bat"};
+         *       DSA13_GroupAnagrams.groupAnagramsUsingStream(a);
+         *
+         */
+
+        /**   DSA-13  Check anagram / group anagrams
+         * in - ["eat","tea","tan","ate","nat","bat"]
+         * out -[["bat"],["nat","tan"],["ate","eat","tea"]]
+         *          #Using HashMap
+         *         String [] a = new String[]  {"eat","tea","tan","ate","nat","bat"};
+         *         DSA13_GroupAnagrams.groupAnagramsUsingHashMap(a);
+         *
+         */
+
+        /**   DSA-14  String palindrome (ignore case/non-alnum)
+         *         String s= "Too hot to hoot";
+         *         DSA14_PalindromeCheck.checkPalindrome(s);
+         *
+         */
+
+        /**   DSA-14  Check if String is valid parentheses (balanced)
+         *         String s= "{}{}[{()}]";
+         *         DSA14_ValidParanthesis.balancedParanthesis(s);
+         */
+
+        String s= "{}{}[{()}]";
+        DSA14_ValidParanthesis.balancedParanthesis(s);
     }
 }

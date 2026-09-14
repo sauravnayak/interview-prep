@@ -1,4 +1,4 @@
-package com.interview.prep.dsa.practice;
+package com.interview.prep.dsa.practice.classicalgorithm;
 
 import java.util.HashMap;
 
