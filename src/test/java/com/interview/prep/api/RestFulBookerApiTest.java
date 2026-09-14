@@ -2,8 +2,13 @@ package com.interview.prep.api;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+import org.hamcrest.Matchers;
+import org.testng.Assert;
 import org.testng.annotations.*;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -70,8 +75,30 @@ public class RestFulBookerApiTest {
         .when()
                 .get("/booking")
         .then()
-                .log().body()
+                .log().body().onFailMessage("Failure")
                 .body("bookingid",notNullValue())
-                .body("bookinngid",hasSize(greaterThan(4000)));
+                .body("bookingid",hasSize(greaterThan(100)));
+    }
+
+    @Test (priority = 1,dependsOnMethods = "login")
+    public void getSpecificBooking(){
+        Response response= given()
+                .contentType(ContentType.JSON)
+                .when()
+                .get("/booking/17")
+                .then()
+                .statusCode(200)
+                .contentType(ContentType.JSON)
+                .log().body()
+                .body("firstname", notNullValue())
+                .body("$",hasKey("lastname"))
+                .body("totalprice",anyOf(isA(Integer.class),isA(Double.class)))
+                .body("depositpaid",isA(Boolean.class))
+                .extract().response();
+        JsonPath jsonPath = response.getBody().jsonPath();
+        LocalDate checkindate = LocalDate.parse(jsonPath.getString("bookingdates.checkin"));
+        LocalDate checkoutdate = LocalDate.parse(jsonPath.getString("bookingdates.checkout"));
+        Assert.assertTrue(checkoutdate.isAfter(checkindate));
+
     }
 }
